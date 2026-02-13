@@ -73,6 +73,17 @@ export const projects = [
   },
   {
     id: 2,
+    title: "Vehicle Maintenance System",
+    description: "A cross-platform Flutter app for managing and tracking vehicle maintenance tasks and records.",
+    longDescription: "A cross-platform mobile application developed using Flutter for vehicle service stations. The app allows customers to book service appointments, track their vehicle's service history, and earn loyalty points for every visit. It features push notifications for service reminders and realtime data updates.",
+    MainImage: VA1,
+    images: [VA1,VA2,VA3,VA4,VA5,VA6,VA7],
+    tags: ["Flutter", "Dart", "Supabase", "Mobile"],
+    category: "Mobile App",
+    github:"https://github.com/dulaj4067/vehicle-maintenance-system"
+  },
+  {
+    id: 3,
     title: "Sketch-Notes",
     description: "Sketch-Notes is a full-stack web app for creating, sketching, and managing notes with AI features.",
     longDescription: "Sketch-Notes is a full stack web application for creating, storing, and managing notes with a sketch. It uses a Python backend (Django REST API with JSON Web Token authentication) and a React frontend powered by Vite and shadcn UI components for a modern, fast, and responsive user experience.",
@@ -83,7 +94,7 @@ export const projects = [
     github:"https://github.com/charith101/Sketch-Notes"
   },
   {
-    id: 3,
+    id: 4,
     title: "Driving School Management System",
     description: "Comprehensive management system for driving school operations.",
     longDescription: "A full-stack management system designed to streamline driving school operations. It handles student scheduling, instructor allocation, payment tracking, and vehicle maintenance logs. The system includes role-based access control for administrators, instructors, and students, ensuring secure and efficient data management.",
@@ -93,15 +104,5 @@ export const projects = [
     category: "Web System",
     github:"https://github.com/charith101/DSMS"
   },
-  {
-    id: 4,
-    title: "Vehicle Maintenance System",
-    description: "A cross-platform Flutter app for managing and tracking vehicle maintenance tasks and records.",
-    longDescription: "A cross-platform mobile application developed using Flutter for vehicle service stations. The app allows customers to book service appointments, track their vehicle's service history, and earn loyalty points for every visit. It features push notifications for service reminders and realtime data updates.",
-    MainImage: VA1,
-    images: [VA1,VA2,VA3,VA4,VA5,VA6,VA7],
-    tags: ["Flutter", "Dart", "Supabase", "Mobile"],
-    category: "Mobile App",
-    github:"https://github.com/dulaj4067/vehicle-maintenance-system"
-  },
+  
 ]

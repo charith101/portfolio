@@ -9,7 +9,7 @@ interface AnimatedThemeTogglerProps extends React.ComponentPropsWithoutRef<"butt
 
 export const AnimatedThemeToggler = ({
   className,
-  duration = 1000,
+  duration = 600,
   ...props
 }: AnimatedThemeTogglerProps) => {
   const { theme, setTheme } = useTheme()
