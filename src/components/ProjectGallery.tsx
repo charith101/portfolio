@@ -107,7 +107,7 @@ export function ProjectGallery() {
       </Card>
 
       <Dialog open={!!selectedProject && !viewerOpen} onOpenChange={(open) => !open && setSelectedProject(null)}>
-        <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-6xl rounded-3xl shadow-2xl border-none bg-background"
+        <DialogContent className="max-h-[80vh] w-[80vw] overflow-y-auto p-4 sm:max-w-8xl rounded-3xl shadow-2xl border-1 border-primary bg-background"
         style={{
           overflowY: "auto",
           scrollbarWidth: "none",
@@ -121,7 +121,7 @@ export function ProjectGallery() {
                   <DialogTitle className="text-2xl sm:text-3xl font-bold tracking-tight">
                     {selectedProject.title}
                   </DialogTitle>
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="flex flex-row justify-center sm:flex-wrap sm:justify-start gap-2 mt-3">
                     <Badge variant="secondary" className="rounded-full px-3">
                       {selectedProject.category}
                     </Badge>
@@ -212,7 +212,7 @@ export function ProjectGallery() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white hover:bg-white/10 rounded-full h-12 w-12"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-black bg-white/80 backdrop-blur-xl hover:text-white hover:bg-white/50 rounded-full h-12 w-12"
                   onClick={handlePrevImage}>
                   <ChevronLeft className="h-8 w-8" />
                 </Button>
@@ -220,7 +220,7 @@ export function ProjectGallery() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white hover:bg-white/10 rounded-full h-12 w-12"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-black bg-white/80 backdrop-blur-xl hover:text-white hover:bg-white/50 rounded-full h-12 w-12"
                   onClick={handleNextImage}>
                   <ChevronRight className="h-8 w-8" />
                 </Button>
