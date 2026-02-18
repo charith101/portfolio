@@ -83,7 +83,7 @@ export function ProjectGallery() {
                 <img
                   src={project.MainImage}
                   alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105  "
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-102"
                 />
               </div>
               <div className="px-2 pb-2">
@@ -107,7 +107,7 @@ export function ProjectGallery() {
       </Card>
 
       <Dialog open={!!selectedProject && !viewerOpen} onOpenChange={(open) => !open && setSelectedProject(null)}>
-        <DialogContent className="max-h-[80vh] w-[80vw] overflow-y-auto p-4 sm:max-w-8xl rounded-3xl shadow-2xl border-1 border-primary bg-background"
+        <DialogContent className="max-h-[85vh] w-[80vw] overflow-y-auto p-4 sm:max-w-8xl rounded-3xl shadow-2xl border-1 border-primary bg-background"
         style={{
           overflowY: "auto",
           scrollbarWidth: "none",
@@ -136,9 +136,9 @@ export function ProjectGallery() {
                 <Carousel className="w-full border-none" opts={{ align: "center", loop: true }}>
                   <CarouselContent className="border-none">
                     {selectedProject.images.map((img, index) => (
-                      <CarouselItem key={index} className="basis-full">
+                      <CarouselItem key={index} className="basis-full ">
                         <div
-                          className="overflow-hidden rounded-2xl border bg-transparent cursor-zoom-in hover:opacity-90 transition aspect-video flex items-center justify-center border-none"
+                          className="overflow-hidden rounded-2xl  bg-transparent cursor-zoom-in hover:opacity-95 transition aspect-video flex items-center justify-center border-2 border-border"
                           onClick={() => {
                             setCurrentImageIndex(index);
                             setViewerOpen(true);
@@ -146,7 +146,7 @@ export function ProjectGallery() {
                           <img
                             src={img}
                             alt={`${selectedProject.title} ${index + 1}`}
-                            className="max-h-full w-auto object-contain border-none"
+                            className="max-h-full w-auto object-contain rounded-md"
                           />
                         </div>
                       </CarouselItem>

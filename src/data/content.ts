@@ -67,7 +67,7 @@ export const projects = [
     longDescription: "A powerful data analysis tool built with Python and Streamlit. This application allows users to upload raw CSV files and immediately generate interactive visualizations without writing code. It leverages Pandas for data manipulation and Plotly for rendering dynamic charts, making data insights accessible to non-technical users.",
     MainImage: dataviz1,
     images: [dataviz1, dataviz2, dataviz3, dataviz4, dataviz5, dataviz6, dataviz7],
-    tags: ["Python", "Streamlit", "Pandas", "Plotly", "Numpy"],
+    tags: ["Python", "Streamlit", "Pandas", "Plotly", "Numpy", "Matplotlib"],
     category: "Data Science",
     github:"https://github.com/charith101/Data-Viz"
   },
@@ -78,7 +78,7 @@ export const projects = [
     longDescription: "A cross-platform mobile application developed using Flutter for vehicle service stations. The app allows customers to book service appointments, track their vehicle's service history, and earn loyalty points for every visit. It features push notifications for service reminders and realtime data updates.",
     MainImage: VA1,
     images: [VA1,VA2,VA3,VA4,VA5,VA6,VA7],
-    tags: ["Flutter", "Dart", "Supabase", "Mobile"],
+    tags: ["Flutter", "Dart", "Supabase", "OneSignal", "Firebase","S3-Storage","Edge-Functions"],
     category: "Mobile App",
     github:"https://github.com/dulaj4067/vehicle-maintenance-system"
   },
@@ -87,9 +87,9 @@ export const projects = [
     title: "Sketch-Notes",
     description: "Sketch-Notes is a full-stack web app for creating, sketching, and managing notes with AI features.",
     longDescription: "Sketch-Notes is a full stack web application for creating, storing, and managing notes with a sketch. It uses a Python backend (Django REST API with JSON Web Token authentication) and a React frontend powered by Vite and shadcn UI components for a modern, fast, and responsive user experience.",
-    MainImage: SN4,
-    images: [SN4, SN2, SN1, SN3],
-    tags: ["Django", "Python", "JWT", "React Canvas", "Canvas API"],
+    MainImage: SN3,
+    images: [SN3, SN2, SN1, SN4],
+    tags: ["Django", "Python", "JWT", "React Canvas", "Canvas API", "Vite", "Shadcn UI"],
     category: "Web & AI",
     github:"https://github.com/charith101/Sketch-Notes"
   },
@@ -100,7 +100,7 @@ export const projects = [
     longDescription: "A full-stack management system designed to streamline driving school operations. It handles student scheduling, instructor allocation, payment tracking, and vehicle maintenance logs. The system includes role-based access control for administrators, instructors, and students, ensuring secure and efficient data management.",
     MainImage: DSMS1,
     images: [DSMS1, DSMS2, DSMS3, DSMS4, DSMS5, DSMS6],
-    tags: ["Mongo DB", "Express JS", "React", "Node.js"],
+    tags: ["Mongo DB", "Express JS", "React", "Node.js","Bootstrap","JSPdf"],
     category: "Web System",
     github:"https://github.com/charith101/DSMS"
   },

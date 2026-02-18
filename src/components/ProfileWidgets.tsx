@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -125,14 +125,24 @@ export function ContactCard() {
 }
 
 export function TechStackCard() {
-
   const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const isDarkMode = 
     theme === "dark" || 
-    (theme === "system" && typeof window !== 'undefined' && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    (theme === "system" && 
+     typeof window !== 'undefined' && 
+     window.matchMedia("(prefers-color-scheme: dark)").matches)
 
   const iconVariant = isDarkMode ? "dark" : "light"
+
+  if (!mounted) {
+    return <Card className="md:col-span-3 p-6 h-[400px] opacity-0" /> 
+  }
 
   return (
     <Card className="md:col-span-3 p-6 flex flex-col bg-card/50 backdrop-blur-sm border-border/50 shadow-sm rounded-3xl gap-1">
@@ -142,16 +152,12 @@ export function TechStackCard() {
           Technical Expertise
         </CardTitle>
       </CardHeader>
-     <CardContent className="p-0 flex flex-col gap-4 overflow-y-auto max-h-[400px] pr-2">
+      <CardContent className="p-0 flex flex-col gap-4 overflow-y-auto max-h-[400px] pr-2">
         <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <Marquee pauseOnHover={false}>
             {tech.map((item, index) => (
-              <div 
-                key={index} 
-                className="flex items-center justify-center px-6 group">
-                <div 
-                  className="
-                    w-7 h-7 transition-all duration-200 transform lg:hover:scale-150 lg:grayscale lg:hover:grayscale-0  text-gray-400 lg:text-gray-800"> 
+              <div key={index} className="flex items-center justify-center px-6 group">
+                <div className="w-7 h-7 transition-all duration-200 transform lg:hover:scale-150 lg:grayscale lg:hover:grayscale-0"> 
                   <StackIcon name={item.icon} variant={iconVariant} />
                 </div>
               </div>
@@ -159,7 +165,6 @@ export function TechStackCard() {
           </Marquee>
         </div>
       </CardContent> 
-    
     </Card>
-  );
+  )
 }
