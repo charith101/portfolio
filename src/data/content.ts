@@ -35,7 +35,6 @@ export const tech = [
   { name: "Shadcn UI", icon: "shadcnui" },
   { name: "Next.js", icon: "nextjs" },
   { name: "Bun", icon: "bunjs" },
-  { name: "Boot Strap", icon: "bootstrap5" },
   { name: "Framer Motion", icon: "framer" },
   { name: "Webpack", icon: "webpack" },
   { name: "Node.js", icon: "nodejs" },

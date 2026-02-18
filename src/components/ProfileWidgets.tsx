@@ -28,7 +28,7 @@ export function ProfileCard() {
         <div className="mb-2">
           <HyperText
             animateOnHover={false}
-            className="text-4xl md:text-6xl text-primary tracking-normal ">
+            className="text-2xl md:text-6xl text-primary tracking-normal ">
             Charith Wijesinghe
           </HyperText>
         </div>
