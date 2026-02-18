@@ -33,7 +33,7 @@ export const tech = [
   { name: "Tailwind", icon: "tailwindcss" },
   { name: "Vite", icon: "vitejs" },
   { name: "Shadcn UI", icon: "shadcnui" },
-  { name: "Next.js", icon: "nextjs2" },
+  { name: "Next.js", icon: "nextjs" },
   { name: "Bun", icon: "bunjs" },
   { name: "Boot Strap", icon: "bootstrap5" },
   { name: "Framer Motion", icon: "framer" },

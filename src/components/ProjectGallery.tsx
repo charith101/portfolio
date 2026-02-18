@@ -79,11 +79,11 @@ export function ProjectGallery() {
               key={project.id}
               className="group relative flex flex-col gap-3 rounded-xl border border-accent bg-background/50 p-2 hover:bg-background/80 hover:border-primary/30 transition-all cursor-pointer"
               onClick={() => setSelectedProject(project)}>
-              <div className="aspect-video w-full overflow-hidden rounded-lg">
+              <div className="aspect-video w-full overflow-hidden rounded-lg border-2 border-border">
                 <img
                   src={project.MainImage}
                   alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105  "
                 />
               </div>
               <div className="px-2 pb-2">

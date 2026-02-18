@@ -148,9 +148,10 @@ export function TechStackCard() {
             {tech.map((item, index) => (
               <div 
                 key={index} 
-                className="flex items-center justify-center px-6 group"
-              >
-                <div className="w-7 h-7 transition-all duration-200 transform hover:scale-150 not-hover:grayscale-200 group-hover:"> 
+                className="flex items-center justify-center px-6 group">
+                <div 
+                  className="
+                    w-7 h-7 transition-all duration-200 transform lg:hover:scale-150 lg:grayscale lg:hover:grayscale-0  text-gray-400 lg:text-gray-800"> 
                   <StackIcon name={item.icon} variant={iconVariant} />
                 </div>
               </div>
