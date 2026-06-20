@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Github, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Github, ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
 import { projects } from "@/data/content";
 
 export function ProjectGallery() {
@@ -174,16 +174,38 @@ export function ProjectGallery() {
                   </div>
                 </div>
 
-                <Button asChild size="lg" className="w-full sm:w-auto rounded-full font-semibold shadow-md">
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2">
-                    <Github className="h-5 w-5" />
-                    View Project Code
-                  </a>
-                </Button>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild size="lg" className="rounded-full font-semibold shadow-md">
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <Github className="h-5 w-5" />
+                      View Project Code
+                    </a>
+                  </Button>
+
+                  {selectedProject.demo && (
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="rounded-full font-semibold"
+                    >
+                      <a
+                        href={selectedProject.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <ExternalLink className="h-5 w-5" />
+                        Live Demo
+                      </a>
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
           )}

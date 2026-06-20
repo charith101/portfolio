@@ -26,6 +26,12 @@ import VA5 from "../assets/Vehicle-App/ss5.png"
 import VA6 from "../assets/Vehicle-App/ss6.png"
 import VA7 from "../assets/Vehicle-App/ss7.png"
 
+import MLPI1 from "../assets/ML-Project-Insurance/MLPI1.png"
+import MLPI2 from "../assets/ML-Project-Insurance/MLPI2.png"
+import MLPI3 from "../assets/ML-Project-Insurance/MLPI3.png"
+import MLPI4 from "../assets/ML-Project-Insurance/MLPI4.png"
+import MLPI5 from "../assets/ML-Project-Insurance/MLPI5.png"
+
 export const tech = [
   { name: "JavaScript", icon: "js" },
   { name: "React", icon: "react" },
@@ -61,6 +67,18 @@ export const tech = [
 export const projects = [
   {
     id: 1,
+    title: "Benchmarked Health Claim Predictor",
+    description: "Machine Learning web application that predicts insurance charges based on customer information.",
+    longDescription:"An end-to-end Machine Learning project built using Python, Pandas, NumPy, and Scikit-learn. The project involves data preprocessing, exploratory data analysis, feature engineering, model training, and evaluation to predict insurance charges. Multiple regression models were tested and compared, with the best-performing model serialized using Pickle and deployed through an interactive Streamlit web application. Users can input customer details and receive real-time insurance premium predictions through a clean and user-friendly interface.",
+    MainImage: MLPI1,
+    images: [MLPI1, MLPI2, MLPI3, MLPI4, MLPI5],
+    tags: ["Python","Machine Learning","Scikit-Learn","Pandas","NumPy","Streamlit","Data Analysis"],
+    category: "Machine Learning",
+    github: "https://github.com/charith101/Benchmarked-Health-Claim-Predictor",
+    demo: "https://benchmarked-health-claim-predictor.streamlit.app"
+  },
+  {
+    id: 2,
     title: "Data-Viz",
     description: "A modular Data Analysis and Visualization tool built with Streamlit.",
     longDescription: "A powerful data analysis tool built with Python and Streamlit. This application allows users to upload raw CSV files and immediately generate interactive visualizations without writing code. It leverages Pandas for data manipulation and Plotly for rendering dynamic charts, making data insights accessible to non-technical users.",
@@ -71,7 +89,7 @@ export const projects = [
     github:"https://github.com/charith101/Data-Viz"
   },
   {
-    id: 2,
+    id: 3,
     title: "Vehicle Maintenance System",
     description: "A cross-platform Flutter app for managing and tracking vehicle maintenance tasks and records.",
     longDescription: "A cross-platform mobile application developed using Flutter for vehicle service stations. The app allows customers to book service appointments, track their vehicle's service history, and earn loyalty points for every visit. It features push notifications for service reminders and realtime data updates.",
@@ -82,7 +100,7 @@ export const projects = [
     github:"https://github.com/dulaj4067/vehicle-maintenance-system"
   },
   {
-    id: 3,
+    id: 4,
     title: "Sketch-Notes",
     description: "Sketch-Notes is a full-stack web app for creating, sketching, and managing notes with AI features.",
     longDescription: "Sketch-Notes is a full stack web application for creating, storing, and managing notes with a sketch. It uses a Python backend (Django REST API with JSON Web Token authentication) and a React frontend powered by Vite and shadcn UI components for a modern, fast, and responsive user experience.",
@@ -93,7 +111,7 @@ export const projects = [
     github:"https://github.com/charith101/Sketch-Notes"
   },
   {
-    id: 4,
+    id: 5,
     title: "Driving School Management System",
     description: "Comprehensive management system for driving school operations.",
     longDescription: "A full-stack management system designed to streamline driving school operations. It handles student scheduling, instructor allocation, payment tracking, and vehicle maintenance logs. The system includes role-based access control for administrators, instructors, and students, ensuring secure and efficient data management.",
