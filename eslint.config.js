@@ -20,4 +20,20 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    files: ['**/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
+    // Third-party file (reactbits GridScan) kept unmodified.
+    files: ['src/components/site/GridScan.tsx'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-empty': 'off',
+      'prefer-const': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+    },
+  },
 ])
