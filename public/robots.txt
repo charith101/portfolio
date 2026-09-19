@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://charith101.pages.dev/sitemap.xml

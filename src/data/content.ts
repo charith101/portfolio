@@ -50,7 +50,7 @@ export const profile = {
   last: "Wijesinghe",
   tagline: "Software that adds an extra layer to your life.",
   intro:
-    "I build products that add an extra layer to everyday life. Machine learning, web, mobile, data: four crafts, one vision. What we build together will one day find its place in the world. Let's make it better.",
+    "I'm Charith Wijesinghe, a full-stack software engineer based in Sri Lanka. I specialize in Machine Learning, Web Development, Mobile Apps, and Data Engineering. I build products that add an extra layer to everyday life — four crafts, one vision. What we build together will one day find its place in the world. Let's make it better.",
   email: "wijesinghecharith32@gmail.com",
   phone: "+94 72 781 2370",
   location: "Sri Lanka · Remote worldwide",

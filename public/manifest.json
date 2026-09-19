@@ -1,0 +1,16 @@
+{
+  "name": "Charith Wijesinghe — Software Engineer",
+  "short_name": "Charith",
+  "description": "Portfolio of Charith Wijesinghe, a full-stack software engineer specializing in Machine Learning, Web Development, Mobile Apps, and Data Engineering.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "icons": [
+    {
+      "src": "/C SVG.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
