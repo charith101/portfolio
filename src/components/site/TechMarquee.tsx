@@ -1,61 +1,168 @@
-import { useRef } from "react"
-import { motion, useAnimationFrame, useMotionValue } from "motion/react"
-import { StackIcon } from "@/components/ui/stack-icon"
-import { tech } from "@/data/content"
-import { Container, MaskReveal, Reveal } from "./ui"
+"use client";
 
-function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
-  const trackRef = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const prevY = useRef(window.scrollY)
-  const lastDir = useRef(reverse ? -1 : 1)
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { StackIcon } from "@/components/ui/stack-icon";
+import { tech } from "@/data/content";
+import { Container, Reveal } from "./ui";
 
-  useAnimationFrame(() => {
-    const y = window.scrollY
-    const delta = y - prevY.current
-    prevY.current = y
-    const scrollDir = delta === 0 ? lastDir.current : Math.sign(delta)
-    lastDir.current = scrollDir
-    const base = reverse ? -1 : 1
+interface Logo {
+  name: string;
+  id: number;
+  img: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon: string;
+}
 
-    if (delta !== 0) {
-      const half = (trackRef.current?.scrollWidth ?? 0) / 2
-      let next = x.get() + base * scrollDir * Math.min(Math.abs(delta) * 0.35, 24)
-      if (half > 0) {
-        while (next <= -half) next += half
-        while (next > 0) next -= half
-      }
-      x.set(next)
+interface LogoColumnProps {
+  logos: Logo[];
+  index: number;
+  currentTime: number;
+}
+
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
+  const shuffled = shuffleArray(allLogos);
+  const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
+
+  shuffled.forEach((logo, index) => {
+    columns[index % columnCount].push(logo);
+  });
+
+  const maxLength = Math.max(...columns.map((col) => col.length));
+  columns.forEach((col) => {
+    while (col.length < maxLength) {
+      col.push(shuffled[Math.floor(Math.random() * shuffled.length)]);
     }
-  })
+  });
+
+  return columns;
+};
+
+function LogoWrapper({ icon, className }: { icon: string; className?: string }) {
+  return (
+    <div className={className}>
+      <StackIcon
+        name={icon}
+        className="w-16 h-16 md:w-24 md:h-24 max-w-[65%] max-h-[65%] object-contain"
+      />
+    </div>
+  );
+}
+
+const LogoColumn: React.FC<LogoColumnProps> = React.memo(
+  ({ logos, index, currentTime }) => {
+    const cycleInterval = 2000;
+    const columnDelay = index * 200;
+    const adjustedTime = (currentTime + columnDelay) % (cycleInterval * logos.length);
+    const currentIndex = Math.floor(adjustedTime / cycleInterval);
+    const currentLogo = logos[currentIndex];
+
+    return (
+      <motion.div
+        className="relative h-12 w-20 overflow-hidden md:h-18 md:w-32"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: index * 0.1,
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${currentLogo.name}-${currentIndex}`}
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ y: "10%", opacity: 0, filter: "blur(8px)" }}
+            animate={{
+              y: "0%",
+              opacity: 1,
+              filter: "blur(0px)",
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+                mass: 1,
+                bounce: 0.2,
+                duration: 0.5,
+              },
+            }}
+            exit={{
+              y: "-20%",
+              opacity: 0,
+              filter: "blur(6px)",
+              transition: {
+                type: "tween",
+                ease: "easeIn",
+                duration: 0.3,
+              },
+            }}
+          >
+            <LogoWrapper icon={currentLogo.icon} />
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    );
+  }
+);
+
+function useColumnCount(): number {
+  const [columnCount, setColumnCount] = useState(2);
+
+  useEffect(() => {
+    const updateColumnCount = () => {
+      setColumnCount(window.innerWidth >= 1024 ? 5 : 2);
+    };
+
+    updateColumnCount();
+    window.addEventListener("resize", updateColumnCount);
+    return () => window.removeEventListener("resize", updateColumnCount);
+  }, []);
+
+  return columnCount;
+}
+
+function LogoCarousel({ logos }: { logos: Logo[] }) {
+  const columnCount = useColumnCount();
+  const [currentTime, setCurrentTime] = useState(0);
+  const logoSets = useMemo(() => distributeLogos(logos, columnCount), [logos, columnCount]);
+
+  const updateTime = useCallback(() => {
+    setCurrentTime((prevTime) => prevTime + 100);
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(updateTime, 100);
+    return () => clearInterval(intervalId);
+  }, [updateTime]);
 
   return (
-    <div className="jak-radius overflow-hidden bg-muted py-5">
-      <div className="overflow-hidden" aria-hidden="true">
-        <motion.div
-          ref={trackRef}
-          style={{ x }}
-          className="flex w-max items-center gap-[clamp(1.25rem,3vw,3rem)] px-[clamp(1.25rem,3vw,3rem)]"
-        >
-          {[...tech, ...tech].map((item, i) => (
-            <div
-              key={i}
-              className="flex size-[clamp(7rem,10vw,9rem)] shrink-0 flex-col items-center justify-center gap-3 rounded-[var(--jak-radius)] bg-background px-4 text-center"
-            >
-              <StackIcon
-                name={item.icon}
-                className="size-[42%]"
-              />
-              <span className="text-xs font-semibold leading-tight">
-                {item.name}
-              </span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+    <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
+      {logoSets.map((colLogos: Logo[], index: number) => (
+        <LogoColumn key={index} logos={colLogos} index={index} currentTime={currentTime} />
+      ))}
     </div>
-  )
+  );
 }
+
+const ALL_LOGOS: Logo[] = tech.map((t, i) => ({
+  name: t.name,
+  id: i + 1,
+  icon: t.icon,
+  img: () => <LogoWrapper icon={t.icon} />,
+}));
 
 export function TechMarquee() {
   return (
@@ -64,21 +171,16 @@ export function TechMarquee() {
         <Reveal>
           <header className="mb-[clamp(2.5rem,5vw,5rem)] flex flex-col items-center gap-4 text-center">
             <span className="jak-pretitle">The stack</span>
-            <h2 className="max-w-3xl text-[clamp(2.5rem,5vw,5.5rem)] font-semibold tracking-tight">
-              <MaskReveal text="Tools I reach for" />
+            <h2 className="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-semibold tracking-tight">
+              Tools I reach for
             </h2>
           </header>
         </Reveal>
-      </Container>
 
-      <Reveal>
-        <Container>
-          <div className="flex flex-col gap-6">
-            <MarqueeRow />
-            <MarqueeRow reverse />
-          </div>
-        </Container>
-      </Reveal>
+        <Reveal delay={0.1}>
+          <LogoCarousel logos={ALL_LOGOS} />
+        </Reveal>
+      </Container>
     </section>
-  )
+  );
 }

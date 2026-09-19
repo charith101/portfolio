@@ -36,22 +36,19 @@ export type StackIconName = keyof typeof icons
 
 export function StackIcon({
   name,
-  variant = "light",
   className,
   style,
 }: {
   name: string
-  variant?: "light" | "dark" | "grayscale"
   className?: string
   style?: CSSProperties
 }) {
   const icon = icons[name as StackIconName]
-  const svg = variant === "light" ? icon : undefined
-  if (!svg) {
+  if (!icon) {
     console.error(`Icon with name "${name}" not found.`)
     return null
   }
-  const html = svg.replace(
+  const html = icon.replace(
     /<svg([^>]*)>/,
     '<svg$1 style="width: 100%; height: 100%; display: block;">'
   )

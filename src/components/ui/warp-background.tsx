@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback, useMemo, type HTMLAttributes } from "react"
+import React, { useMemo, type HTMLAttributes } from "react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -21,15 +21,16 @@ const Beam = ({
   x,
   delay,
   duration,
+  hue,
+  ar,
 }: {
-  width: string | number
-  x: string | number
-  delay: number
-  duration: number
+  width: string | number;
+  x: string | number;
+  delay: number;
+  duration: number;
+  hue: number;
+  ar: number;
 }) => {
-  const hue = Math.floor(Math.random() * 360)
-  const ar = Math.floor(Math.random() * 10) + 1
-
   return (
     <motion.div
       style={
@@ -50,8 +51,28 @@ const Beam = ({
         ease: "linear",
       }}
     />
-  )
-}
+  );
+};
+
+const generateBeamProps = (
+  beamsPerSide: number,
+  beamSize: number,
+  beamDelayMax: number,
+  beamDelayMin: number
+) => {
+  const beams = [];
+  const cellsPerSide = Math.floor(100 / beamSize);
+  const step = cellsPerSide / beamsPerSide;
+
+  for (let i = 0; i < beamsPerSide; i++) {
+    const x = Math.floor(i * step);
+    const delay = Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
+    const hue = Math.floor(Math.random() * 360);
+    const ar = Math.floor(Math.random() * 10) + 1;
+    beams.push({ x, delay, hue, ar });
+  }
+  return beams;
+};
 
 export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   children,
@@ -65,23 +86,22 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   gridColor = "var(--border)",
   ...props
 }) => {
-  const generateBeams = useCallback(() => {
-    const beams = []
-    const cellsPerSide = Math.floor(100 / beamSize)
-    const step = cellsPerSide / beamsPerSide
-
-    for (let i = 0; i < beamsPerSide; i++) {
-      const x = Math.floor(i * step)
-      const delay = Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin
-      beams.push({ x, delay })
-    }
-    return beams
-  }, [beamsPerSide, beamSize, beamDelayMax, beamDelayMin])
-
-  const topBeams = useMemo(() => generateBeams(), [generateBeams])
-  const rightBeams = useMemo(() => generateBeams(), [generateBeams])
-  const bottomBeams = useMemo(() => generateBeams(), [generateBeams])
-  const leftBeams = useMemo(() => generateBeams(), [generateBeams])
+  const topBeams = useMemo(
+    () => generateBeamProps(beamsPerSide, beamSize, beamDelayMax, beamDelayMin),
+    [beamsPerSide, beamSize, beamDelayMax, beamDelayMin]
+  );
+  const rightBeams = useMemo(
+    () => generateBeamProps(beamsPerSide, beamSize, beamDelayMax, beamDelayMin),
+    [beamsPerSide, beamSize, beamDelayMax, beamDelayMin]
+  );
+  const bottomBeams = useMemo(
+    () => generateBeamProps(beamsPerSide, beamSize, beamDelayMax, beamDelayMin),
+    [beamsPerSide, beamSize, beamDelayMax, beamDelayMin]
+  );
+  const leftBeams = useMemo(
+    () => generateBeamProps(beamsPerSide, beamSize, beamDelayMax, beamDelayMin),
+    [beamsPerSide, beamSize, beamDelayMax, beamDelayMin]
+  );
 
   return (
     <div className={cn("relative rounded border p-20", className)} {...props}>
@@ -106,6 +126,8 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
               x={`${beam.x * beamSize}%`}
               delay={beam.delay}
               duration={beamDuration}
+              hue={beam.hue}
+              ar={beam.ar}
             />
           ))}
         </div>
@@ -118,6 +140,8 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
               x={`${beam.x * beamSize}%`}
               delay={beam.delay}
               duration={beamDuration}
+              hue={beam.hue}
+              ar={beam.ar}
             />
           ))}
         </div>
@@ -130,6 +154,8 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
               x={`${beam.x * beamSize}%`}
               delay={beam.delay}
               duration={beamDuration}
+              hue={beam.hue}
+              ar={beam.ar}
             />
           ))}
         </div>
@@ -142,6 +168,8 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
               x={`${beam.x * beamSize}%`}
               delay={beam.delay}
               duration={beamDuration}
+              hue={beam.hue}
+              ar={beam.ar}
             />
           ))}
         </div>

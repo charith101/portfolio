@@ -13,9 +13,9 @@ export function Hero() {
       className="relative flex h-[100svh] w-full flex-col overflow-hidden"
     >
       <WarpBackground className="absolute inset-0 size-full rounded-none border-0 p-0">
-        <div className="absolute left-1/2 top-1/2 aspect-9/16 md:aspect-video w-[min(30vw,30rem)] -translate-x-1/2 -translate-y-1/2 rounded-[0.01rem] bg-background" />
+        <div className="absolute left-1/2 top-1/2 aspect-9/16 md:aspect-video w-[min(30vw,30rem)] -translate-x-1/2 -translate-y-1/2 rounded-[0.01rem] bg-background dark:bg-background" />
         <Container className="relative z-10 flex h-[100svh] w-full max-w-full flex-col items-center justify-center text-center">
-          <h1 className="-mt-[0.05em] flex flex-col text-[clamp(2.5rem,10.5vw,12.5rem)] font-semibold leading-[0.88] tracking-tight break-words">
+          <h1 className="-mt-[0.05em] flex flex-col text-[clamp(3.5rem,12vw,12.5rem)] font-semibold leading-[0.88] tracking-tight break-words">
             <span className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
               <motion.span
                 className="block"
