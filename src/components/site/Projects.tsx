@@ -6,7 +6,7 @@ import { ProjectModal } from "./ProjectModal"
 import { Arrow } from "./PillButton"
 import { cn } from "@/lib/utils"
 
-export function Projects() {
+export default function Projects() {
   const [active, setActive] = useState<number | null>(null)
   const project = projects.find((p) => p.id === active) ?? null
 

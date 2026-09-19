@@ -1,9 +1,9 @@
 "use client";
 
 import React, {
-  useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -21,7 +21,7 @@ interface Logo {
 interface LogoColumnProps {
   logos: Logo[];
   index: number;
-  currentTime: number;
+  currentIndex: number;
 }
 
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -63,12 +63,9 @@ function LogoWrapper({ icon, className }: { icon: string; className?: string }) 
 }
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
-  ({ logos, index, currentTime }) => {
-    const cycleInterval = 2000;
-    const columnDelay = index * 200;
-    const adjustedTime = (currentTime + columnDelay) % (cycleInterval * logos.length);
-    const currentIndex = Math.floor(adjustedTime / cycleInterval);
-    const currentLogo = logos[currentIndex];
+  ({ logos, index, currentIndex }) => {
+    const safeIndex = (currentIndex ?? 0) % logos.length;
+    const currentLogo = logos[safeIndex];
 
     return (
       <motion.div
@@ -83,7 +80,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${currentLogo.name}-${currentIndex}`}
+            key={`${currentLogo.name}-${safeIndex}`}
             className="absolute inset-0 flex items-center justify-center"
             initial={{ y: "10%", opacity: 0, filter: "blur(8px)" }}
             animate={{
@@ -136,22 +133,44 @@ function useColumnCount(): number {
 
 function LogoCarousel({ logos }: { logos: Logo[] }) {
   const columnCount = useColumnCount();
-  const [currentTime, setCurrentTime] = useState(0);
   const logoSets = useMemo(() => distributeLogos(logos, columnCount), [logos, columnCount]);
 
-  const updateTime = useCallback(() => {
-    setCurrentTime((prevTime) => prevTime + 100);
-  }, []);
+  const cycleInterval = 2000;
+  const timeRef = useRef(0);
+  const currentIndexRef = useRef<number[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    return logoSets.map((colLogos, i) => {
+      const adjusted = (0 + i * 200) % (cycleInterval * colLogos.length);
+      return Math.floor(adjusted / cycleInterval) % colLogos.length;
+    });
+  });
 
   useEffect(() => {
-    const intervalId = setInterval(updateTime, 100);
-    return () => clearInterval(intervalId);
-  }, [updateTime]);
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    let raf: number;
+    const tick = () => {
+      timeRef.current += 16;
+      const newIndices = logoSets.map((colLogos, i) => {
+        const adjusted = (timeRef.current + i * 200) % (cycleInterval * colLogos.length);
+        return Math.floor(adjusted / cycleInterval) % colLogos.length;
+      });
+      const changed = newIndices.some((idx, i) => idx !== currentIndexRef.current[i]);
+      if (changed) {
+        setCurrentIndex(newIndices);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [logoSets, cycleInterval]);
 
   return (
     <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
       {logoSets.map((colLogos: Logo[], index: number) => (
-        <LogoColumn key={index} logos={colLogos} index={index} currentTime={currentTime} />
+        <LogoColumn key={index} logos={colLogos} index={index} currentIndex={currentIndex[index]} />
       ))}
     </div>
   );
@@ -164,7 +183,7 @@ const ALL_LOGOS: Logo[] = tech.map((t, i) => ({
   img: () => <LogoWrapper icon={t.icon} />,
 }));
 
-export function TechMarquee() {
+export default function TechMarquee() {
   return (
     <section className="jak-section">
       <Container>

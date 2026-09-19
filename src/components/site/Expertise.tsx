@@ -14,7 +14,7 @@ const ICONS: Record<string, ComponentType<{ className?: string }>> = {
 
 const GAP = 48
 
-export function Expertise() {
+export default function Expertise() {
   return (
     <section id="expertise" className="jak-section">
       <Container>

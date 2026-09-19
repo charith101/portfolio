@@ -3,7 +3,7 @@ import { nav, profile } from "@/data/content"
 import { Container } from "./ui"
 import { scrollToId } from "@/lib/scroll"
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <Container className="grid gap-12 py-[clamp(3.5rem,7vw,7rem)] md:grid-cols-3">

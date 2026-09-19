@@ -1,40 +1,40 @@
-import dataviz1 from "../assets/Data-Viz/Image 1.jpg";
-import dataviz2 from "../assets/Data-Viz/Image 2.jpg";
-import dataviz3 from "../assets/Data-Viz/Image 3.jpg";
-import dataviz4 from "../assets/Data-Viz/Image 4.jpg";
-import dataviz5 from "../assets/Data-Viz/Image 5.jpg";
-import dataviz6 from "../assets/Data-Viz/Image 6.jpg";
-import dataviz7 from "../assets/Data-Viz/Image 7.jpg";
+import dataviz1 from "../assets/Data-Viz/Image 1.webp";
+import dataviz2 from "../assets/Data-Viz/Image 2.webp";
+import dataviz3 from "../assets/Data-Viz/Image 3.webp";
+import dataviz4 from "../assets/Data-Viz/Image 4.webp";
+import dataviz5 from "../assets/Data-Viz/Image 5.webp";
+import dataviz6 from "../assets/Data-Viz/Image 6.webp";
+import dataviz7 from "../assets/Data-Viz/Image 7.webp";
 
-import SN1 from "../assets/Sketch-Notes/SN 1.jpg"
-import SN2 from "../assets/Sketch-Notes/SN 2.jpg"
-import SN3 from "../assets/Sketch-Notes/SN 3.jpg"
-import SN4 from "../assets/Sketch-Notes/SN 4.jpg"
+import SN1 from "../assets/Sketch-Notes/SN 1.webp"
+import SN2 from "../assets/Sketch-Notes/SN 2.webp"
+import SN3 from "../assets/Sketch-Notes/SN 3.webp"
+import SN4 from "../assets/Sketch-Notes/SN 4.webp"
 
-import DSMS1 from "../assets/DSMS/DSMS 1.jpg"
-import DSMS2 from "../assets/DSMS/DSMS 2.jpg"
-import DSMS3 from "../assets/DSMS/DSMS 3.jpg"
-import DSMS4 from "../assets/DSMS/DSMS 4.jpg"
-import DSMS5 from "../assets/DSMS/DSMS 5.jpg"
-import DSMS6 from "../assets/DSMS/DSMS 6.jpg"
+import DSMS1 from "../assets/DSMS/DSMS 1.webp"
+import DSMS2 from "../assets/DSMS/DSMS 2.webp"
+import DSMS3 from "../assets/DSMS/DSMS 3.webp"
+import DSMS4 from "../assets/DSMS/DSMS 4.webp"
+import DSMS5 from "../assets/DSMS/DSMS 5.webp"
+import DSMS6 from "../assets/DSMS/DSMS 6.webp"
 
-import VA1 from "../assets/Vehicle-App/ss1.jpg"
-import VA2 from "../assets/Vehicle-App/ss2.jpg"
-import VA3 from "../assets/Vehicle-App/ss3.jpg"
-import VA4 from "../assets/Vehicle-App/ss4.jpg"
-import VA5 from "../assets/Vehicle-App/ss5.jpg"
-import VA6 from "../assets/Vehicle-App/ss6.jpg"
-import VA7 from "../assets/Vehicle-App/ss7.jpg"
+import VA1 from "../assets/Vehicle-App/ss1.webp"
+import VA2 from "../assets/Vehicle-App/ss2.webp"
+import VA3 from "../assets/Vehicle-App/ss3.webp"
+import VA4 from "../assets/Vehicle-App/ss4.webp"
+import VA5 from "../assets/Vehicle-App/ss5.webp"
+import VA6 from "../assets/Vehicle-App/ss6.webp"
+import VA7 from "../assets/Vehicle-App/ss7.webp"
 
-import MLPI1 from "../assets/ML-Project-Insurance/MLPI1.jpg"
-import MLPI2 from "../assets/ML-Project-Insurance/MLPI2.jpg"
-import MLPI3 from "../assets/ML-Project-Insurance/MLPI3.jpg"
-import MLPI4 from "../assets/ML-Project-Insurance/MLPI4.jpg"
-import MLPI5 from "../assets/ML-Project-Insurance/MLPI5.jpg"
+import MLPI1 from "../assets/ML-Project-Insurance/MLPI1.webp"
+import MLPI2 from "../assets/ML-Project-Insurance/MLPI2.webp"
+import MLPI3 from "../assets/ML-Project-Insurance/MLPI3.webp"
+import MLPI4 from "../assets/ML-Project-Insurance/MLPI4.webp"
+import MLPI5 from "../assets/ML-Project-Insurance/MLPI5.webp"
 
-import DPPW1 from "../assets/DPPW/IMG 1.jpg"
-import DPPW2 from "../assets/DPPW/IMG 2.jpg"
-import DPPW3 from "../assets/DPPW/IMG 3.jpg"
+import DPPW1 from "../assets/DPPW/IMG 1.webp"
+import DPPW2 from "../assets/DPPW/IMG 2.webp"
+import DPPW3 from "../assets/DPPW/IMG 3.webp"
 
 export const nav = [
   { label: "Projects", href: "#projects" },

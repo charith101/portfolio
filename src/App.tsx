@@ -1,10 +1,12 @@
+import { lazy, Suspense } from "react"
 import { Header } from "@/components/site/Header"
 import { Hero } from "@/components/site/Hero"
-import { Projects } from "@/components/site/Projects"
-import { Expertise } from "@/components/site/Expertise"
-import { About, Approach } from "@/components/site/AboutApproach"
-import { TechMarquee } from "@/components/site/TechMarquee"
-import { Footer } from "@/components/site/Footer"
+
+const Projects = lazy(() => import("@/components/site/Projects"))
+const Expertise = lazy(() => import("@/components/site/Expertise"))
+const AboutApproach = lazy(() => import("@/components/site/AboutApproach"))
+const TechMarquee = lazy(() => import("@/components/site/TechMarquee"))
+const Footer = lazy(() => import("@/components/site/Footer"))
 
 function App() {
   return (
@@ -12,15 +14,16 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Projects />
-        {/* <ScrollTitle /> */}
-        <Expertise />
-        <About />
-        <Approach />
-        <TechMarquee />
-        {/* <Cta /> */}
+        <Suspense>
+          <Projects />
+          <Expertise />
+          <AboutApproach />
+          <TechMarquee />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

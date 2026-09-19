@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { about, approach, approachSteps } from "@/data/content"
 import { Container, MaskReveal, Reveal } from "./ui"
@@ -39,7 +39,16 @@ const stepEffects = [
   },
 ]
 
-export function About() {
+export default function AboutApproach() {
+  return (
+    <>
+      <AboutSection />
+      <ApproachSection />
+    </>
+  )
+}
+
+function AboutSection() {
   return (
     <section id="about" className="jak-section -mt-20">
       <Container>
@@ -50,17 +59,6 @@ export function About() {
               <MaskReveal text={about.title} />
             </h2>
             <p className="max-w-[52ch] text-balance">{about.text}</p>
-            {/* <a
-              href={about.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 font-semibold"
-            >
-              {about.linkLabel}
-              <span className="grid size-12 place-items-center rounded-full bg-primary text-secondary transition-transform duration-300 group-hover:-rotate-45">
-                <Arrow className="text-xl" />
-              </span>
-            </a> */}
           </header>
         </Reveal>
       </Container>
@@ -71,7 +69,22 @@ export function About() {
 function StepSlider() {
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
+  const [inView, setInView] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "200px" }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
+    <div ref={containerRef}>
     <Carousel
       className="mx-auto w-full max-w-7xl px-0 sm:px-0"
       setApi={setApi}
@@ -113,7 +126,7 @@ function StepSlider() {
                 className="jak-radius relative mx-2 flex aspect-3/4 flex-col justify-between overflow-hidden bg-card p-8"
               >
                 <AnimatePresence>
-                  {hovered === step.n && (
+                  {hovered === step.n && inView && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -149,10 +162,11 @@ function StepSlider() {
         })}
       </CarouselContent>
     </Carousel>
+    </div>
   )
 }
 
-export function Approach() {
+function ApproachSection() {
   return (
     <section id="approach" className="jak-section overflow-hidden">
       <Container>
