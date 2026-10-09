@@ -14,7 +14,6 @@ import { Container, Reveal } from "./ui";
 interface Logo {
   name: string;
   id: number;
-  img: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   icon: string;
 }
 
@@ -56,7 +55,7 @@ function LogoWrapper({ icon, className }: { icon: string; className?: string }) 
     <div className={className}>
       <StackIcon
         name={icon}
-        className="w-16 h-16 md:w-24 md:h-24 max-w-[65%] max-h-[65%] object-contain"
+        className="h-16 w-16 max-h-[65%] max-w-[65%] md:h-24 md:w-24"
       />
     </div>
   );
@@ -88,12 +87,15 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               opacity: 1,
               filter: "blur(0px)",
               transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                mass: 1,
-                bounce: 0.2,
-                duration: 0.5,
+                y: {
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                  mass: 1,
+                  bounce: 0.2,
+                },
+                opacity: { duration: 0.4 },
+                filter: { type: "tween", ease: "easeOut", duration: 0.5 },
               },
             }}
             exit={{
@@ -116,11 +118,11 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
 );
 
 function useColumnCount(): number {
-  const [columnCount, setColumnCount] = useState(2);
+  const [columnCount, setColumnCount] = useState(3);
 
   useEffect(() => {
     const updateColumnCount = () => {
-      setColumnCount(window.innerWidth >= 1024 ? 5 : 2);
+      setColumnCount(window.innerWidth >= 1024 ? 5 : 3);
     };
 
     updateColumnCount();
@@ -180,7 +182,6 @@ const ALL_LOGOS: Logo[] = tech.map((t, i) => ({
   name: t.name,
   id: i + 1,
   icon: t.icon,
-  img: () => <LogoWrapper icon={t.icon} />,
 }));
 
 export default function TechMarquee() {

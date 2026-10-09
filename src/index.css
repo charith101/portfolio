@@ -110,6 +110,12 @@
   html {
     scroll-behavior: smooth;
     position: relative;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
   }
 
   body {
@@ -118,6 +124,7 @@
     font-size: clamp(1.0625rem, 1.25vw, 1.5rem);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    -ms-overflow-style: none;
   }
 
   ::selection {
@@ -290,6 +297,17 @@
     --btn-bg: var(--beige);
     --btn-circle-bg: var(--secondary);
     --btn-circle-color: var(--primary);
+  }
+
+  .jak-btn--outline {
+    --btn-color: var(--foreground);
+    --btn-bg: transparent;
+    --btn-circle-bg: var(--primary);
+    --btn-circle-color: var(--primary-foreground);
+  }
+
+  .jak-btn--outline .jak-btn__label {
+    border: 1px solid var(--border);
   }
 
   /* Link with growing underline */

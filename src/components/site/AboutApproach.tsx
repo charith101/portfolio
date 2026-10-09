@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react"
 import { about, approach, approachSteps } from "@/data/content"
 import { Container, MaskReveal, Reveal } from "./ui"
 import { scrollToId } from "@/lib/scroll"
+import { cn } from "@/lib/utils"
 import { Arrow } from "./PillButton"
 
 const CanvasRevealEffect = lazy(() =>
@@ -117,13 +118,16 @@ function StepSlider() {
           return (
             <CarouselItem
               key={step.n}
-              className="pl-0 hover:text-white"
+              className="pl-0"
               style={{ flexBasis: "min(24rem, 100%)", paddingLeft: "0" }}
             >
               <div
                 onMouseEnter={() => setHovered(step.n)}
                 onMouseLeave={() => setHovered(null)}
-                className="jak-radius relative mx-2 flex aspect-3/4 flex-col justify-between overflow-hidden bg-card p-8"
+                className={cn(
+                  "jak-radius relative mx-2 flex aspect-3/4 flex-col justify-between overflow-hidden bg-card p-8 transition-colors duration-300",
+                  hovered === step.n && "text-white"
+                )}
               >
                 <AnimatePresence>
                   {hovered === step.n && inView && (

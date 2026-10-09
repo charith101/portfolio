@@ -23,7 +23,7 @@ export function Arrow({ className }: { className?: string }) {
 }
 
 interface PillButtonProps extends ComponentPropsWithoutRef<"a"> {
-  variant?: "default" | "beige" | "light" | "onprimary"
+  variant?: "default" | "beige" | "light" | "onprimary" | "outline"
 }
 
 export function PillButton({
@@ -39,6 +39,7 @@ export function PillButton({
         variant === "beige" && "jak-btn--beige",
         variant === "light" && "jak-btn--light",
         variant === "onprimary" && "jak-btn--onprimary",
+        variant === "outline" && "jak-btn--outline",
         className
       )}
       {...props}

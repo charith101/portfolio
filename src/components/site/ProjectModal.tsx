@@ -1,4 +1,5 @@
-import { Github, Globe } from "lucide-react"
+import { Globe } from "lucide-react"
+import GithubMark from "~icons/simple-icons/github"
 import {
   Dialog,
   DialogContent,
@@ -75,9 +76,9 @@ export function ProjectModal({
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="beige"
+                variant="outline"
               >
-                <Github className="mr-2 inline-block size-5" /> Source code
+                <GithubMark className="mr-2 inline-block size-5" /> Source code
               </PillButton>
             )}
             {project.demo && (

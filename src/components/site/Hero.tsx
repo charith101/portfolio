@@ -1,54 +1,119 @@
+import { useEffect, useRef, useState } from "react"
 import { motion } from "motion/react"
 import { ArrowDown } from "lucide-react"
 import { Container, RotatingBadge } from "./ui"
 import { profile } from "@/data/content"
-import { WarpBackground } from "@/components/ui/warp-background"
+import MicroSlats from "@/components/ui/micro-slats"
+import { MobileHeroName } from "@/components/site/HeroName"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
+const NAME_STYLE = { fontFamily: "var(--font-sans)", fontWeight: 450 }
+
+const SLAT = {
+  light: "#cfcfcf",
+  dark: "#56615b",
+} as const
+
+const GLINT_COLORS = [
+  "#ff2e97",
+  "#ff7a00",
+  "#00e676",
+  "#00d5ff",
+  "#b23cff",
+] as const
+
+const GLINT_COLOR =
+  GLINT_COLORS[Math.floor(Math.random() * GLINT_COLORS.length)]
+
+function useSlatColor() {
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains("dark"),
+  )
+
+  useEffect(() => {
+    const root = document.documentElement
+    const sync = () => setIsDark(root.classList.contains("dark"))
+    const observer = new MutationObserver(sync)
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] })
+    return () => observer.disconnect()
+  }, [])
+
+  return isDark ? SLAT.dark : SLAT.light
+}
+
 export function Hero() {
+  const slatColor = useSlatColor()
+  const mobileNameRef = useRef<HTMLElement | null>(null)
+
   return (
     <section
       id="top"
       className="relative flex h-[100svh] w-full flex-col overflow-hidden"
     >
-      <WarpBackground className="absolute inset-0 size-full rounded-none border-0 p-0">
-        <div className="absolute left-1/2 top-1/2 aspect-9/16 md:aspect-video w-[min(30vw,30rem)] -translate-x-1/2 -translate-y-1/2 rounded-[0.01rem] bg-background dark:bg-background" />
-        <Container className="relative z-10 flex h-[100svh] w-full max-w-full flex-col items-center justify-center text-center">
-          <h1 className="-mt-[0.05em] flex flex-col text-[clamp(3.5rem,12vw,12.5rem)] font-semibold leading-[0.88] tracking-tight break-words">
-            <span className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
-              <motion.span
-                className="block"
-                initial={{ x: "-104%" }}
-                animate={{ x: "0%" }}
-                transition={{ duration: 1, delay: 0.2, ease: EASE }}
-              >
-                {profile.first}
-              </motion.span>
-            </span>
-            <span className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
-              <motion.span
-                className="block"
-                initial={{ x: "104%" }}
-                animate={{ x: "0%" }}
-                transition={{ duration: 1, delay: 0.3, ease: EASE }}
-              >
-                {profile.last}
-              </motion.span>
-            </span>
-          </h1>
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <MicroSlats
+          preset="tide"
+          color={slatColor}
+          glintColor={GLINT_COLOR}
+          backgroundColor="rgba(0,0,0,0)"
+          slatWidth={12}
+          slatHeight={28}
+          gap={3}
+          roundness={0.8}
+          speed={0.45}
+          glint={1.15}
+          contrast={1.25}
+          fog={0.45}
+          perspective={0.5}
+          interactive
+          cursorStrength={0.9}
+          cursorSize={60}
+          swirl={0.15}
+          trail={1.6}
+          lean={0.25}
+          intro
+          introDuration={1.8}
+        />
+      </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.85, ease: EASE }}
-            className="mt-[clamp(1.25rem,3vw,2.5rem)] max-w-[36ch] text-balance"
+      <Container className="relative z-10 flex h-[100svh] w-full max-w-full flex-col items-center justify-center text-center">
+        <h1 className="sr-only">{profile.name}</h1>
+
+        <div aria-hidden className="mx-auto w-full max-w-[92vw]">
+          <div
+            data-hero-name
+            className="invisible mx-auto hidden w-fit justify-center md:flex"
           >
-            <span className="jak-pretitle mb-3 block">Data Science/Software Engineer</span>
-           
-          </motion.p>
-        </Container>
-      </WarpBackground>
+            <span
+              className="text-[clamp(2.7rem,8.55vw,9.9rem)] leading-none"
+              style={NAME_STYLE}
+            >
+              {profile.name}
+            </span>
+          </div>
+          <div
+            ref={(el) => {
+              mobileNameRef.current = el
+            }}
+            data-hero-name
+            className="mx-auto w-fit md:hidden"
+          >
+            <MobileHeroName containerRef={mobileNameRef} />
+          </div>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.85, ease: EASE }}
+          className="mt-[clamp(1.25rem,3vw,2.5rem)] max-w-[36ch] text-balance"
+        >
+          <span className="jak-pretitle mb-3 block">
+            Data Science/Software Engineer
+          </span>
+        </motion.p>
+      </Container>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
@@ -59,7 +124,9 @@ export function Hero() {
         <button
           type="button"
           onClick={() =>
-            document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
+            document
+              .getElementById("projects")
+              ?.scrollIntoView({ behavior: "smooth" })
           }
           className="group cursor-pointer bg-transparent"
           aria-label="Scroll to projects"
