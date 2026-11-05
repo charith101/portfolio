@@ -36,6 +36,12 @@ import DPPW1 from "../assets/DPPW/IMG 1.webp"
 import DPPW2 from "../assets/DPPW/IMG 2.webp"
 import DPPW3 from "../assets/DPPW/IMG 3.webp"
 
+import SC1 from "../assets/RTSP-MacOS-App/01-all-cameras.webp"
+import SC2 from "../assets/RTSP-MacOS-App/02-camera-view.webp"
+import SC3 from "../assets/RTSP-MacOS-App/03-menu-bar-preview.webp"
+import SC4 from "../assets/RTSP-MacOS-App/04-settings.webp"
+import SC5 from "../assets/RTSP-MacOS-App/05-add-camera.webp"
+
 export const nav = [
   { label: "Projects", href: "#projects" },
   { label: "Expertise", href: "#expertise" },
@@ -239,6 +245,17 @@ export const projects = [
   },
   {
     id: 3,
+    title: "Sentinel Cam",
+    description: "A native macOS menu bar app for watching RTSP cameras — live view, all-cameras grid, snapshots, and hardware decode.",
+    longDescription: "Sentinel Cam is a native macOS menu bar app for watching RTSP cameras — standalone cameras and multi-channel NVRs/DVRs alike. Swift 6, SwiftUI + AppKit, hardware H.264/H.265 decode through VideoToolbox. No Xcode required: Command Line Tools and SwiftPM are enough. It's an RTSP viewer, not a camera platform: no ONVIF, cloud accounts, or vendor apps — if your camera exposes an RTSP URL, it can show it. Features include a menu bar preview popover, an all-cameras grid (2×2 or 3×3 tiles per page), snapshots saved or copied as PNG, demand-driven decoding that stops every stream when the window is hidden or covered, and reconnect with exponential backoff and jitter.",
+    MainImage: SC3,
+    images: [SC3, SC1, SC2, SC4, SC5],
+    tags: ["Swift", "SwiftUI", "AppKit", "SwiftPM", "VideoToolbox", "macOS"],
+    category: "Desktop",
+    github: "https://github.com/charith101/Sentinel-Cam"
+  },
+  {
+    id: 4,
     title: "Data-Viz",
     description: "A modular Data Analysis and Visualization tool built with Streamlit.",
     longDescription: "A powerful data analysis tool built with Python and Streamlit. This application allows users to upload raw CSV files and immediately generate interactive visualizations without writing code. It leverages Pandas for data manipulation and Plotly for rendering dynamic charts, making data insights accessible to non-technical users.",
@@ -249,7 +266,7 @@ export const projects = [
     github:"https://github.com/charith101/Data-Viz"
   },
   {
-    id: 4,
+    id: 5,
     title: "Vehicle Maintenance System",
     description: "A cross-platform Flutter app for managing and tracking vehicle maintenance tasks and records.",
     longDescription: "A cross-platform mobile application developed using Flutter for vehicle service stations. The app allows customers to book service appointments, track their vehicle's service history, and earn loyalty points for every visit. It features push notifications for service reminders and realtime data updates.",
@@ -260,7 +277,7 @@ export const projects = [
     github:"https://github.com/dulaj4067/vehicle-maintenance-system"
   },
   {
-    id: 5,
+    id: 6,
     title: "Sketch-Notes",
     description: "Sketch-Notes is a full-stack web app for creating, sketching, and managing notes with AI features.",
     longDescription: "Sketch-Notes is a full stack web application for creating, storing, and managing notes with a sketch. It uses a Python backend (Django REST API with JSON Web Token authentication) and a React frontend powered by Vite and shadcn UI components for a modern, fast, and responsive user experience.",
@@ -271,7 +288,7 @@ export const projects = [
     github:"https://github.com/charith101/Sketch-Notes"
   },
   {
-    id: 6,
+    id: 7,
     title: "Driving School Management System",
     description: "Comprehensive management system for driving school operations.",
     longDescription: "A full-stack management system designed to streamline driving school operations. It handles student scheduling, instructor allocation, payment tracking, and vehicle maintenance logs. The system includes role-based access control for administrators, instructors, and students, ensuring secure and efficient data management.",
